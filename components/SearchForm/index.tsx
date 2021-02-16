@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import useStyles from "./styles";
-import { Button, FormControl, InputLabel, TextField } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 import Select from "react-select";
 
 const SearchForm = () => {
@@ -15,20 +15,24 @@ const SearchForm = () => {
         name="group"
         control={control}
         defaultValue=""
+        rules={{ required: true }}
         render={({ onChange, value }) => (
           <TextField
+            error={errors.group}
             onChange={onChange}
             value={value}
             type="text"
             label="Група"
             placeholder="Група"
             className={classes.textField}
+            helperText={errors.group ? "Введіть групу" : null}
           />
         )}
       />
       <Controller
         className={classes.textField}
         name="doctor"
+        rules={{ required: true }}
         control={control}
         options={[
           { value: "Хірург", label: "Хірург" },
@@ -37,6 +41,7 @@ const SearchForm = () => {
         ]}
         as={Select}
       />
+      {errors.doctor && <Typography className={classes.error} variant="subtitle2">Виберіть лікаря</Typography>}
       {!isAuth ? (
         <Controller
           name="description"

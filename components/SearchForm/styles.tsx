@@ -16,7 +16,13 @@ const useStyles = makeStyles((theme: Theme) =>
     button: {
       width: 250,
       marginTop: theme.spacing(4),
-    }
+    },
+    error: {
+      color: "#f44336",
+      fontSize: "0.75rem",
+      textAlign: 'left',
+      fontWeight: 400,
+    },
   })
 );
 
