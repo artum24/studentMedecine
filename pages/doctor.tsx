@@ -74,20 +74,21 @@ const schedulerData = [
   },
   {
     title: "Book Flights to San Fran for Sales Trip",
-    startDate: new Date(2021, 1, 16, 15, 35),
-    endDate: new Date(2021, 1, 16, 16, 30),
+    startDate: new Date(2021, 1, 16, 13, 35),
+    endDate: new Date(2021, 1, 16, 14, 30),
     id: 1,
   },
 ];
 
 const Doctor = () => {
+  console.log(schedulerData);
   return (
     <Paper>
       <Scheduler data={schedulerData} height={660}>
         <ViewState />
         <WeekView
           startDayHour={9}
-          endDayHour={19}
+          endDayHour={16}
           timeTableCellComponent={TimeTableCell}
           dayScaleCellComponent={DayScaleCell}
         />
