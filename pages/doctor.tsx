@@ -7,6 +7,7 @@ import {
 } from "@devexpress/dx-react-scheduler-material-ui";
 import { makeStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import { data } from "../data/data";
 
 const useStyles = makeStyles((theme) => ({
   todayCell: {
@@ -67,14 +68,14 @@ const DayScaleCell = (props) => {
 const schedulerData = [
   {
     title: "Website Re-Design Plan",
-    startDate: new Date(2021, 1, 20, 9, 35),
-    endDate: new Date(2021, 1, 20, 11, 30),
+    startDate: new Date(2021, 2, 22, 9, 35),
+    endDate: new Date(2021, 2, 22, 11, 30),
     id: 0,
   },
   {
     title: "Book Flights to San Fran for Sales Trip",
-    startDate: new Date(2021, 1, 20, 15, 35),
-    endDate: new Date(2021, 1, 20, 16, 30),
+    startDate: new Date(2021, 2, 23, 15, 35),
+    endDate: new Date(2021, 2, 23, 16, 30),
     id: 1,
   },
 ];
@@ -83,7 +84,7 @@ const Doctor = () => {
   return (
     <Paper>
       <Scheduler data={schedulerData} height={660}>
-        <ViewState />
+        <ViewState defaultCurrentDate="2021-02-22"/>
         <WeekView
           startDayHour={9}
           endDayHour={19}
