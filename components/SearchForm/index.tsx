@@ -1,14 +1,22 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+
 import useStyles from "./styles";
 import { Button, TextField, Typography } from "@material-ui/core";
 import Select from "react-select";
 
-const SearchForm = () => {
+type Props = {
+  setGroupName: Dispatch<any>;
+};
+
+type SearchType = { group: string; doctor: string };
+
+const SearchForm: React.FC<Props> = ({ setGroupName }) => {
   const classes = useStyles();
-  const isAuth = useState(false);
   const { handleSubmit, control, errors } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const isAuth = useState(false);
+  const onSubmit = (data: SearchType) => setGroupName(data.group);
+
   return (
     <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -41,7 +49,11 @@ const SearchForm = () => {
         ]}
         as={Select}
       />
-      {errors.doctor && <Typography className={classes.error} variant="subtitle2">Виберіть лікаря</Typography>}
+      {errors.doctor && (
+        <Typography className={classes.error} variant="subtitle2">
+          Виберіть лікаря
+        </Typography>
+      )}
       {!isAuth ? (
         <Controller
           name="description"
