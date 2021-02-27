@@ -5,3 +5,13 @@ export type TableDataType = {
   id: number;
   doctorId: number;
 }
+
+
+export type GroupSheduleType = {
+  group: String;
+  "Понеділок": boolean[],
+  "Вівторок": boolean[],
+  "Середа": boolean[],
+  "Четвер":boolean[],
+  "П'ятниця": boolean[]
+}
