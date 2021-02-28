@@ -1,9 +1,8 @@
 import { Dispatch } from "react";
 import { useForm, Controller } from "react-hook-form";
-
+import Select from "react-select";
 import useStyles from "./styles";
 import { Button, TextField, Typography } from "@material-ui/core";
-import Select from "react-select";
 
 type Props = {
   setGroupName: Dispatch<any>;
@@ -45,6 +44,8 @@ const SearchForm: React.FC<Props> = ({ setGroupName }) => {
           { value: "Хірург", label: "Хірург" },
           { value: "Логопед", label: "Логопед" },
           { value: "Травматолог", label: "Травматолог" },
+          { value: "Окуліст", label: "Окуліст" },
+          { value: "Стоматолог", label: "Стоматолог" },
         ]}
         as={Select}
       />

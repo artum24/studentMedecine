@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { useAuth } from "@/lib/auth";
 import Login from "../Login";
 import { Button, Container } from "@material-ui/core";
-import { useAuth } from "@/lib/auth";
+
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);

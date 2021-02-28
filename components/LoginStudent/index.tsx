@@ -1,9 +1,7 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import DialogActions from "@material-ui/core/DialogActions";
+import { useAuth } from "@/lib/auth";
 import useStyles from "./styles";
 import { FcGoogle } from "react-icons/fc";
-import { useAuth } from "@/lib/auth";
+import {Button, DialogActions} from "@material-ui/core";
 
 type Props = {
   handleClose: () => void;

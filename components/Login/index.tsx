@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import LoginDoctor from "../LoginDoctor";
 import LoginStudent from "../LoginStudent";
 import { Dialog, DialogTitle, Typography } from "@material-ui/core";
