@@ -16,7 +16,6 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
-
   const handleUser = (rawUser) => {
     if (rawUser) {
       const user = formatUser(rawUser);
@@ -35,7 +34,6 @@ function useProvideAuth() {
   };
 
   const signinWithGoogle = () => {
-    Router.push("/dashboard");
     return firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -43,7 +41,6 @@ function useProvideAuth() {
   };
 
   const signout = () => {
-    Router.push("/");
     return firebase
       .auth()
       .signOut()
@@ -67,6 +64,7 @@ const formatUser = (user) => {
     uid: user.uid,
     email: user.email,
     token: user.za,
+    status: "student",
     name: user.displayName ? user.displayName : "",
     provider: user.providerData[0].providerId,
     photoURL: user.photoURL,

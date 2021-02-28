@@ -1,4 +1,4 @@
-import { Dispatch, useState } from "react";
+import { Dispatch } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import useStyles from "./styles";
@@ -14,7 +14,6 @@ type SearchType = { group: string; doctor: string };
 const SearchForm: React.FC<Props> = ({ setGroupName }) => {
   const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
-  const isAuth = useState(false);
   const onSubmit = (data: SearchType) => setGroupName(data.group);
 
   return (
@@ -54,28 +53,6 @@ const SearchForm: React.FC<Props> = ({ setGroupName }) => {
           Виберіть лікаря
         </Typography>
       )}
-      {!isAuth ? (
-        <Controller
-          name="description"
-          control={control}
-          defaultValue=""
-          render={({ onChange, value }) => (
-            <TextField
-              onChange={onChange}
-              value={value}
-              variant="outlined"
-              label="Опис проблеми"
-              type="text"
-              name="description"
-              multiline
-              rows={3}
-              placeholder="Опис проблеми"
-              className={classes.textField}
-            />
-          )}
-        />
-      ) : null}
-
       <Button
         className={classes.button}
         type="submit"

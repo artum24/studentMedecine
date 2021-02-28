@@ -30,7 +30,6 @@ const Home: React.FC = () => {
     getFreeTimes("Середа");
     getFreeTimes("Четвер");
     getFreeTimes("П'ятниця");
-    console.log(freeTimes);
   }
 
   const result = useSWR([`/api/student/${groupName.toUpperCase()}`], fetcher);
@@ -50,7 +49,9 @@ const Home: React.FC = () => {
       <SearchForm setGroupName={setGroupName} />
       {groupShedule ? (
         <>
-          <Typography variant="h3" align="center">{groupShedule.group}</Typography>
+          <Typography variant="h3" align="center">
+            {groupShedule.group}
+          </Typography>
           {freeTimes["Понеділок"].length > 0 ? (
             <StudentFreeDayList
               period={freeTimes["Понеділок"]}

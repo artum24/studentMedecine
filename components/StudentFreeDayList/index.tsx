@@ -7,6 +7,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
+import { useAuth } from "@/lib/auth";
 
 type Props = {
   period: number[];
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const StudentFreeDayList: React.FC<Props> = ({ period, day }) => {
+  const { user } = useAuth();
   function getTime(period: number) {
     if (period === 1) {
       return "8:30 - 10:05";
@@ -32,9 +34,11 @@ const StudentFreeDayList: React.FC<Props> = ({ period, day }) => {
         {period.map((item) => (
           <ListItem key={item}>
             <ListItemText primary={getTime(item)} />
-            <Button color="primary" variant="outlined">
-              Записатися
-            </Button>
+            {user ? (
+              <Button color="primary" variant="outlined">
+                Записатися
+              </Button>
+            ) : null}
           </ListItem>
         ))}
       </List>
