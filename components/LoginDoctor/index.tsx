@@ -1,22 +1,24 @@
 import { useForm, Controller } from "react-hook-form";
 import useStyles from "./styles";
-import {
-  Button,
-  TextField,
-} from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
+import { useAuth } from "@/lib/auth";
 
 type Props = {
   handleClose: () => void;
 };
 
 const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
+  const auth = useAuth();
   const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
-  const onSubmit = (data: any) => handleClose();
+  const onSubmit = (data: { email: string; password: string }) => {
+    auth.signinDoctor(data.email, data.password);
+    handleClose();
+  };
   return (
     <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name="login"
+        name="email"
         control={control}
         defaultValue=""
         rules={{ required: true }}
@@ -25,8 +27,8 @@ const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
             error={errors.login}
             onChange={onChange}
             value={value}
-            type="text"
-            placeholder="Login"
+            type="email"
+            placeholder="Email"
             className={classes.textField}
             helperText={errors.login ? "Введіть логін" : null}
           />

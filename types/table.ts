@@ -3,7 +3,7 @@ export type TableDataType = {
   startDate: Date;
   endDate: Date;
   id: number;
-  doctorId: number;
+  doctorId: string;
 }
 
 

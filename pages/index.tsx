@@ -12,6 +12,7 @@ const Home: React.FC = () => {
     null
   );
   const [groupName, setGroupName] = useState("");
+
   const freeTimes = {
     Понеділок: [],
     Вівторок: [],

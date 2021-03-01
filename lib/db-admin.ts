@@ -15,3 +15,4 @@ export async function getStudentShedule(groupName) {
     return { error };
   }
 }
+
