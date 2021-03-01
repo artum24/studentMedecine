@@ -15,9 +15,7 @@ const Doctor = () => {
   const { user } = useAuth();
   console.log(user);
   const router = useRouter();
-  if (!user || user.status !== "doctor") {
-    router.push("/");
-  }
+
   const doctorData = data.filter((item) => item.doctorId === router.query.id);
   return (
     <Paper>
