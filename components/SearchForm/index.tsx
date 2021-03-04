@@ -8,7 +8,7 @@ type Props = {
   setGroupName: Dispatch<any>;
 };
 
-type SearchType = { group: string; doctor: string };
+type SearchType = { group: string; };
 
 const SearchForm: React.FC<Props> = ({ setGroupName }) => {
   const classes = useStyles();
@@ -35,25 +35,6 @@ const SearchForm: React.FC<Props> = ({ setGroupName }) => {
           />
         )}
       />
-      <Controller
-        className={classes.textField}
-        name="doctor"
-        rules={{ required: true }}
-        control={control}
-        options={[
-          { value: "Хірург", label: "Хірург" },
-          { value: "Логопед", label: "Логопед" },
-          { value: "Травматолог", label: "Травматолог" },
-          { value: "Окуліст", label: "Окуліст" },
-          { value: "Стоматолог", label: "Стоматолог" },
-        ]}
-        as={Select}
-      />
-      {errors.doctor && (
-        <Typography className={classes.error} variant="subtitle2">
-          Виберіть лікаря
-        </Typography>
-      )}
       <Button
         className={classes.button}
         type="submit"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import {
   List,
@@ -8,7 +8,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-
+import CreateRecord from "../CreateRecord";
 
 type Props = {
   period: number[];
@@ -17,6 +17,19 @@ type Props = {
 
 const StudentFreeDayList: React.FC<Props> = ({ period, day }) => {
   const { user } = useAuth();
+  const [open, setOpen] = useState(false);
+  const [time, setTime] = useState("");
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const openRecord = (time: string) => {
+    setTime(time);
+    handleClickOpen();
+  };
   function getTime(period: number) {
     if (period === 1) {
       return "8:30 - 10:05";
@@ -30,13 +43,23 @@ const StudentFreeDayList: React.FC<Props> = ({ period, day }) => {
   }
   return (
     <div>
+      <CreateRecord
+        day={day}
+        period={time}
+        open={open}
+        handleClose={handleClose}
+      />
       <Typography variant="subtitle1">{day}</Typography>
       <List component="nav">
         {period.map((item) => (
           <ListItem key={item}>
             <ListItemText primary={getTime(item)} />
             {user ? (
-              <Button color="primary" variant="outlined">
+              <Button
+                onClick={() => openRecord(getTime(item))}
+                color="primary"
+                variant="outlined"
+              >
                 Записатися
               </Button>
             ) : null}
