@@ -1,4 +1,3 @@
-import { Dispatch } from "react";
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
 import useStyles from "./styles";
@@ -48,7 +47,6 @@ const CreateRecordForm: React.FC = () => {
             label="Опис проблеми"
             placeholder="Опис проблеми"
             className={classes.textField}
-            helperText={errors.group ? "Введіть групу" : null}
           />
         )}
       />

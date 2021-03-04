@@ -5,6 +5,7 @@ import cookie from "js-cookie";
 import Router from "next/router";
 
 const authContext = createContext<any>({});
+
 export function AuthProvider({ children }) {
   const auth = useProvideAuth();
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
@@ -19,8 +20,7 @@ function useProvideAuth() {
   const handleUser = (rawUser, status?: string) => {
     if (rawUser) {
       const user = formatUser(rawUser, status);
-      const { token, ...userWithoutToken } = user;
-      createUser(user.uid, userWithoutToken);
+      createUser(user.uid, user);
       setUser(user);
       cookie.set("fast-feedback-auth", true, {
         expires: 1,
@@ -56,7 +56,7 @@ function useProvideAuth() {
       .then(() => handleUser(false));
   };
   useEffect(() => {
-    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser);
+    const unsubscribe = firebase.auth().onAuthStateChanged(handleUser);
     return () => unsubscribe();
   }, []);
   return {
@@ -67,12 +67,11 @@ function useProvideAuth() {
   };
 }
 
-const formatUser = (user, status) => {
+const formatUser = (user, status:string) => {
   return {
     uid: user.uid,
     email: user.email,
-    token: user.za ? user.za : "",
-    status,
+    status: status ? status : "",
     name: user.displayName ? user.displayName : "",
     provider: user.providerData[0].providerId,
   };
