@@ -13,9 +13,7 @@ const Login: React.FC<Props> = ({ open, handleClose }) => {
   const changeLogin = () => setLoginStudent(!loginStudent);
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true}>
-      <DialogTitle style={{ textAlign: "center" }} id="form-dialog-title">
-        Login
-      </DialogTitle>
+      <DialogTitle style={{ textAlign: "center" }}>Login</DialogTitle>
       {loginStudent ? (
         <LoginStudent handleClose={handleClose} />
       ) : (

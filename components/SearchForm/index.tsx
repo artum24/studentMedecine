@@ -1,6 +1,5 @@
 import { Dispatch } from "react";
 import { useForm, Controller } from "react-hook-form";
-import Select from "react-select";
 import useStyles from "./styles";
 import { Button, TextField, Typography } from "@material-ui/core";
 

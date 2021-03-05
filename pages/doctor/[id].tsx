@@ -9,11 +9,8 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import Paper from "@material-ui/core/Paper";
-import { useAuth } from "@/lib/auth";
 
 const Doctor = () => {
-  const { user } = useAuth();
-  console.log(user);
   const router = useRouter();
 
   const doctorData = data.filter((item) => item.doctorId === router.query.id);

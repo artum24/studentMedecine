@@ -3,7 +3,6 @@ import { useAuth } from "@/lib/auth";
 import Login from "../Login";
 import { Button, Container } from "@material-ui/core";
 
-
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { user, signout } = useAuth();
@@ -14,6 +13,7 @@ const Header: React.FC = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Container maxWidth="lg">
       <div className="header">
@@ -35,7 +35,6 @@ const Header: React.FC = () => {
             Login
           </Button>
         )}
-
         <Login handleClose={handleClose} open={open} />
       </div>
     </Container>

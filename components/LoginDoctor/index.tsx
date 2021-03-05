@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
+import { useAuth } from "@/lib/auth";
 import useStyles from "./styles";
 import { Button, TextField } from "@material-ui/core";
-import { useAuth } from "@/lib/auth";
 
 type Props = {
   handleClose: () => void;
@@ -9,12 +9,14 @@ type Props = {
 
 const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
   const auth = useAuth();
-  const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
   const onSubmit = (data: { email: string; password: string }) => {
     auth.signinDoctor(data.email, data.password);
     handleClose();
   };
+
+  const classes = useStyles();
+
   return (
     <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
       <Controller
