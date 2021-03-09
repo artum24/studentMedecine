@@ -18,8 +18,8 @@ const Doctor = () => {
   let dataa = [];
   if (result && result.data) {
     dataa = result.data.records.map((item) => {
-      const endDate = new Date(1970, 0, 1);
-      const startDate = new Date(1970, 0, 1);
+      const endDate = new Date(1970, 0, 1, 2, 0);
+      const startDate = new Date(1970, 0, 1, 2, 0);
       endDate.setSeconds(item.endDate._seconds);
       startDate.setSeconds(item.startDate._seconds);
       return { ...item, endDate, startDate };
