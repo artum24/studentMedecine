@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import useSWR from "swr";
 import { GroupSheduleType } from "types/table";
@@ -6,13 +7,18 @@ import fetcher from "@/utils/fetcher";
 import SearchForm from "@/components/SearchForm";
 import StudentFreeDayList from "@/components/StudentFreeDayList";
 import { Container, Typography, Divider } from "@material-ui/core";
+import { useAuth } from "@/lib/auth";
 
 const Home: React.FC = () => {
   const [groupShedule, setGroupShedule] = useState<GroupSheduleType | null>(
     null
   );
   const [groupName, setGroupName] = useState("");
-
+  const router = useRouter();
+  const { user } = useAuth();
+  if (user && user.status === "doctor") {
+    router.push(`/doctor/${user.email}`);
+  }
   const freeTimes = {
     Понеділок: [],
     Вівторок: [],

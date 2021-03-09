@@ -17,9 +17,9 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
-  const handleUser = (rawUser, status?: string) => {
+  const handleUser = (rawUser) => {
     if (rawUser) {
-      const user = formatUser(rawUser, status);
+      const user = formatUser(rawUser);
       createUser(user.uid, user);
       setUser(user);
       cookie.set("fast-feedback-auth", true, {
@@ -37,7 +37,7 @@ function useProvideAuth() {
     return firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((response) => handleUser(response.user, "student"));
+      .then((response) => handleUser(response.user));
   };
 
   const signinDoctor = (email, password) => {
@@ -45,7 +45,7 @@ function useProvideAuth() {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((response) => handleUser(response.user, "doctor"));
+      .then((response) => handleUser(response.user));
   };
 
   const signout = () => {
@@ -67,11 +67,12 @@ function useProvideAuth() {
   };
 }
 
-const formatUser = (user, status:string) => {
+const formatUser = (user) => {
   return {
     uid: user.uid,
     email: user.email,
-    status: status ? status : "",
+    status:
+      user.providerData[0].providerId === "password" ? "doctor" : "student",
     name: user.displayName ? user.displayName : "",
     provider: user.providerData[0].providerId,
   };

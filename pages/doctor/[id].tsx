@@ -13,7 +13,6 @@ import Paper from "@material-ui/core/Paper";
 
 const Doctor = () => {
   const router = useRouter();
-
   const result = useSWR([`/api/doctor/${router.query.id}`], fetcher);
   let dataa = [];
   if (result && result.data) {
