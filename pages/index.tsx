@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState } from "react";
 import useSWR from "swr";
 import { GroupSheduleType } from "types/table";
-import { statusType } from "types/status";
 import fetcher from "@/utils/fetcher";
 import SearchForm from "@/components/SearchForm";
 import StudentFreeDayList from "@/components/StudentFreeDayList";

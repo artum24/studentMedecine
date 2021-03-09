@@ -16,3 +16,18 @@ export async function getStudentShedule(groupName) {
   }
 }
 
+export async function getDoctorRecords(doctor) {
+  try {
+    const snapshot = await db
+      .collection("records")
+      .where("doctorId", "==", doctor)
+      .get();
+    const records = [];
+    snapshot.forEach((doc) => {
+      records.push({ ...doc.data() });
+    });
+    return { records };
+  } catch (error) {
+    return { error };
+  }
+}
