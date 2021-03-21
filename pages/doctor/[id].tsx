@@ -10,9 +10,18 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import Paper from "@material-ui/core/Paper";
+import { useAuth } from "@/lib/auth";
+import { useEffect } from "react";
 
 const Doctor = () => {
   const router = useRouter();
+  const { user } = useAuth();
+  useEffect(() => {
+    if (!user || (user && user.status !== "doctor")) {
+      router.push("/");
+    }
+  }, [user]);
+
   const result = useSWR([`/api/doctor/${router.query.id}`], fetcher);
   let dataa = [];
   if (result && result.data) {

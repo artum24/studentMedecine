@@ -8,3 +8,10 @@ export function createUser(uid, data) {
     .doc(uid)
     .set({ uid, ...data }, { merge: true });
 }
+
+export function createRecord(uid, data) {
+  return firestore
+    .collection("records")
+    .doc(uid)
+    .set({ uid, ...data }, { merge: true });
+}

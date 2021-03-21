@@ -9,25 +9,28 @@ import {
 type Props = {
   open: boolean;
   handleClose: () => void;
-  day: string;
-  period: string;
+  date: Date;
 };
 
-const CreateRecord: React.FC<Props> = ({ open, handleClose, day, period }) => (
-  <Dialog
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-  >
-    <DialogTitle>Запис до лікаря</DialogTitle>
-    <DialogContent>
-      <Typography variant="subtitle1">
-        {day} {period}
-      </Typography>
-      <CreateRecordForm />
-    </DialogContent>
-  </Dialog>
-);
+type SearchType = { description: string; doctor: string };
+
+const CreateRecord: React.FC<Props> = ({ open, handleClose, date }) => {
+  const onSubmit = (data: SearchType) => console.log(data);
+  console.log(date);
+  return (
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle>Запис до лікаря</DialogTitle>
+      <DialogContent>
+        {/* <Typography variant="subtitle1">{date}</Typography> */}
+        <CreateRecordForm onSubmit={onSubmit} />
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 export default CreateRecord;
