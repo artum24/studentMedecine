@@ -36,7 +36,7 @@ const Doctor = () => {
   return (
     <Paper>
       <Scheduler data={dataa} height={660}>
-        <ViewState defaultCurrentDate="2021-03-10" />
+        <ViewState defaultCurrentDate={new Date()} />
         <WeekView
           startDayHour={9}
           endDayHour={16}
