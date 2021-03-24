@@ -22,51 +22,55 @@ const Home: React.FC = () => {
 
   const [groupName, setGroupName] = useState("");
 
-  const freeTimes = {
-    Понеділок: {
+  let freeTimes = [
+    {
+      day: "Понеділок",
       id: 1,
       list: [],
     },
-    Вівторок: {
-      id: 2,
-      list: [],
-    },
-    Середа: {
-      id: 3,
-      list: [],
-    },
-    Четвер: {
+    { day: "Вівторок", id: 2, list: [] },
+    { day: "Середа", id: 3, list: [] },
+    {
+      day: "Четвер",
       id: 4,
       list: [],
     },
-    "П'ятниця": {
+    {
+      day: "П'ятниця",
       id: 5,
       list: [],
     },
-  };
-
-  function getFreeTimes(day: string) {
-    groupShedule[day].map(
-      (item: boolean, index: number) =>
-        item === false &&
-        (freeTimes[day].list = [...freeTimes[day].list, index + 1])
-    );
+  ];
+  function getFreeTimes(day: string, id: number) {
+    groupShedule[day].map((item: boolean, index: number) => {
+      if (item === false) {
+        const inde = freeTimes.findIndex((item) => item.id === id);
+        const FreeTimesLeft = freeTimes.slice(0, inde);
+        const FreeTimesRight = freeTimes.slice(inde + 1);
+        const newObject = {
+          id,
+          day,
+          list: [...freeTimes[inde].list, index + 1],
+        };
+        freeTimes = [...FreeTimesLeft, newObject, ...FreeTimesRight];
+      }
+    });
   }
 
   if (groupShedule) {
-    getFreeTimes("Понеділок");
-    getFreeTimes("Вівторок");
-    getFreeTimes("Середа");
-    getFreeTimes("Четвер");
-    getFreeTimes("П'ятниця");
+    getFreeTimes("Понеділок", 1);
+    getFreeTimes("Вівторок", 2);
+    getFreeTimes("Середа", 3);
+    getFreeTimes("Четвер", 4);
+    getFreeTimes("П'ятниця", 5);
   }
 
   const result = useSWR([`/api/student/${groupName.toUpperCase()}`], fetcher);
   result.data &&
     result.data.group[0] !== groupShedule &&
     setGroupShedule(result.data.group[0]);
-  
-    return (
+
+  return (
     <Container className="home">
       <Head>
         <title>Головна сторінка</title>
