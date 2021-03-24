@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme: Theme) =>
       marginTop: theme.spacing(4),
       marginBottom: theme.spacing(5),
     },
+    item: {
+      cursor: "pointer",
+    },
+    active: {
+      color: "#3F51B5",
+    },
     error: {
       color: "#f44336",
       fontSize: "0.75rem",

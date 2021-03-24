@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { FreeTimeType } from "../FreeTimesCalendar";
+import useStyles from "./styles";
 
 type Props = {
   open: boolean;
@@ -38,7 +39,7 @@ function formatDate(date: Date, time: string) {
 const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
   const [trueTime, setTrueTime] = useState("");
   const resultTime = day.list.map((item) => getTime(item));
-
+  const classes = useStyles();
   const onSubmit = (data: SearchType) => {
     const timeDate = trueTime.split("-");
     const startDate = formatDate(date, timeDate[0]);
@@ -63,7 +64,9 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
             {resultTime.map((item) => (
               <Typography
                 variant="subtitle1"
-                color={`${item === trueTime ? "primary" : "initial"}`}
+                className={`${classes.item} ${
+                  item === trueTime && classes.active
+                }`}
                 onClick={() => setTrueTime(item)}
               >
                 {item}
