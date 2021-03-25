@@ -3,6 +3,7 @@ import Select from "react-select";
 
 import useStyles from "./styles";
 import { Button, TextField, Typography } from "@material-ui/core";
+import { doctorOption } from "./doctorOption";
 
 type Props = {
   onSubmit: (data) => void;
@@ -19,13 +20,7 @@ const CreateRecordForm: React.FC<Props> = ({ onSubmit }) => {
         name="doctor"
         rules={{ required: true }}
         control={control}
-        options={[
-          { value: "surgeon@gmail.com", label: "Хірург" },
-          { value: "therapist@gmail.com", label: "Логопед" },
-          { value: "traumatologist@gmail.com", label: "Травматолог" },
-          { value: "oculist@gmail.com", label: "Окуліст" },
-          { value: "dentist@gmail.com", label: "Стоматолог" },
-        ]}
+        options={doctorOption}
         as={Select}
       />
       {errors.doctor && (

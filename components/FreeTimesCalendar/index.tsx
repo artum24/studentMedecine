@@ -5,7 +5,6 @@ import CreateRecord from "../CreateRecord";
 import {
   DatePicker,
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
 } from "@material-ui/pickers";
 import { Button, Typography } from "@material-ui/core";
 
@@ -22,7 +21,6 @@ type Props = {
 const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
-  console.log(freeTimes);
   const handleClose = () => {
     setOpen(false);
   };

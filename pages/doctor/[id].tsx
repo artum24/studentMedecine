@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import useSWR from "swr";
+import { useAuth } from "@/lib/auth";
+import { useEffect } from "react";
 import fetcher from "@/utils/fetcher";
+
 import TimeTableCell from "@/components/TimeTableCell";
 import DayScaleCell from "@/components/DayScaleCell";
 import { ViewState } from "@devexpress/dx-react-scheduler";
@@ -10,8 +13,6 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import Paper from "@material-ui/core/Paper";
-import { useAuth } from "@/lib/auth";
-import { useEffect } from "react";
 
 const Doctor = () => {
   const router = useRouter();

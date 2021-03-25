@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import CreateRecordForm from "./form";
+import useStyles from "./styles";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +9,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { FreeTimeType } from "../FreeTimesCalendar";
-import useStyles from "./styles";
 
 type Props = {
   open: boolean;
@@ -37,14 +38,22 @@ function formatDate(date: Date, time: string) {
 }
 
 const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
-  const [trueTime, setTrueTime] = useState("");
-  const resultTime = day.list.map((item) => getTime(item));
   const classes = useStyles();
-  const onSubmit = (data: SearchType) => {
+
+  const resultTime = day.list.map((item) => getTime(item));
+  const [trueTime, setTrueTime] = useState(resultTime[0]);
+  const [records, setRecords] = useState([]);
+
+  useEffect(() => {
     const timeDate = trueTime.split("-");
     const startDate = formatDate(date, timeDate[0]);
     const endDate = formatDate(date, timeDate[1]);
-  };
+    axios
+      .get("/api/records", { params: [startDate, endDate] })
+      .then((res) => setRecords(res.data));
+  }, [trueTime, day, date]);
+
+  const onSubmit = (data: SearchType) => {};
 
   return (
     <Dialog

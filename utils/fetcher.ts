@@ -1,4 +1,4 @@
-const fetcher = async (url) => {
+const fetcher = async (url: string) => {
   const res = await fetch(url, {
     method: "GET",
     credentials: "same-origin",

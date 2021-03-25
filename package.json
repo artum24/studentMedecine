@@ -17,6 +17,7 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.3.10",
     "@types/firebase": "^3.2.1",
+    "axios": "^0.21.1",
     "date-fns": "^2.17.0",
     "firebase": "^8.2.9",
     "firebase-admin": "^9.5.0",
