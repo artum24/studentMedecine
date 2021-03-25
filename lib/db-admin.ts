@@ -32,17 +32,19 @@ export async function getDoctorRecords(doctor: string) {
   }
 }
 
-export async function getAllDoctorRecords(startTime: Date, endTime: Date) {
+export async function getAllDoctorRecords(startTime: Date) {
   try {
     const snapshot = await db
       .collection("records")
-      .where("startDate", "!=", startTime.getTime())
       .get();
     const records = [];
     snapshot.forEach((doc) => {
       records.push({ ...doc.data() });
     });
-    return { records };
+    const newRecords = records.filter(
+      (item) => item.startDate["_seconds"] !== startTime
+    );
+    return { records: newRecords };
   } catch (error) {
     return { error };
   }

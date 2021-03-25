@@ -20,37 +20,39 @@ type Props = {
 type SearchType = { description: string; doctor: string };
 
 function getTime(period: number) {
-  if (period === 1) {
-    return "8:30 - 10:05";
+  switch (period) {
+    case 1:
+      return "8:30 - 10:05";
+    case 2:
+      return "10:25 - 12:00";
+    case 3:
+      return "12:20 - 13:55";
+    case 4:
+      return "14:15 - 16:50";
   }
-  if (period === 2) {
-    return "10:25 - 12:00";
-  }
-  if (period === 3) {
-    return "12:20 - 13:55";
-  } else return "14:15 - 16:50";
 }
 
 function formatDate(date: Date, time: string) {
   const timeString = time.split(":");
   const DateInHours = new Date(date.setHours(+timeString[0]));
-  return new Date(DateInHours.setMinutes(+timeString[1]));
+  const DateInMinutes = new Date(DateInHours.setMinutes(+timeString[1]));
+  return new Date(DateInMinutes.setSeconds(0));
 }
 
 const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
   const classes = useStyles();
-
   const resultTime = day.list.map((item) => getTime(item));
-  const [trueTime, setTrueTime] = useState(resultTime[0]);
+  const [trueTime, setTrueTime] = useState(null);
   const [records, setRecords] = useState([]);
-
+  console.log(records);
   useEffect(() => {
-    const timeDate = trueTime.split("-");
-    const startDate = formatDate(date, timeDate[0]);
-    const endDate = formatDate(date, timeDate[1]);
-    axios
-      .get("/api/records", { params: [startDate, endDate] })
-      .then((res) => setRecords(res.data));
+    if (trueTime) {
+      const timeDate = trueTime.split("-");
+      const startDate = formatDate(date, timeDate[0]);
+      axios
+        .get("/api/records", { params: { startDate } })
+        .then((res) => setRecords(res.data));
+    }
   }, [trueTime, day, date]);
 
   const onSubmit = (data: SearchType) => {};
