@@ -32,7 +32,7 @@ export async function getDoctorRecords(doctor: string) {
   }
 }
 
-export async function getAllDoctorRecords(startTime: Date) {
+export async function getAllDoctorRecords(startTime: number) {
   try {
     const snapshot = await db
       .collection("records")

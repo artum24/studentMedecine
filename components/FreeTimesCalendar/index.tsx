@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { useAuth } from "@/lib/auth";
 import DateFnsUtils from "@date-io/date-fns";
 import CreateRecord from "../CreateRecord";
-import {
-  DatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Button, Typography } from "@material-ui/core";
+import useStyles from "./style";
 
 export type FreeTimeType = {
   day: string;
@@ -19,6 +17,7 @@ type Props = {
 };
 
 const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
+  const classes = useStyles();
   const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -41,7 +40,7 @@ const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
     return res;
   };
   return (
-    <div className="freeTimes">
+    <div className={classes.freeTimes}>
       <CreateRecord
         date={date}
         day={freeTimes.filter((item) => item.id === date.getDay())[0]}
@@ -49,7 +48,7 @@ const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
         handleClose={handleClose}
       />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <div className="freeTimes__date">
+        <div className={classes.date}>
           <DatePicker
             autoOk={false}
             orientation="landscape"
@@ -61,7 +60,7 @@ const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
             shouldDisableDate={disableData}
           />
         </div>
-        <div className="freeTimes__isAuth">
+        <div className={classes.isAuth}>
           {user ? (
             <Button
               color="primary"

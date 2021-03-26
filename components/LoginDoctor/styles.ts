@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
@@ -10,18 +10,18 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     textField: {
-      marginTop: theme.spacing(4),
+      marginTop: 30,
       width: 250,
     },
     button: {
       width: 250,
-      marginTop: theme.spacing(4),
-      marginBottom: theme.spacing(5),
+      marginTop: 30,
+      marginBottom: 40,
     },
     error: {
       color: "#f44336",
       fontSize: "0.75rem",
-      textAlign: 'left',
+      textAlign: "left",
       fontWeight: 400,
     },
   })

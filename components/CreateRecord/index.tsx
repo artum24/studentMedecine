@@ -44,6 +44,7 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
   const resultTime = day.list.map((item) => getTime(item));
   const [trueTime, setTrueTime] = useState(null);
   const [records, setRecords] = useState([]);
+  console.log(resultTime);
   console.log(records);
   useEffect(() => {
     if (trueTime) {
@@ -55,7 +56,7 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
     }
   }, [trueTime, day, date]);
 
-  const onSubmit = (data: SearchType) => {};
+  const onSubmit = (data: SearchType) => console.log(data);
 
   return (
     <Dialog

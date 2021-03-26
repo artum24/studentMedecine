@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { useForm, Controller } from "react-hook-form";
 import useStyles from "./styles";
-import { Button, TextField, Typography } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 type Props = {
   setGroupName: Dispatch<any>;

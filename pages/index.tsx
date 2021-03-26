@@ -9,6 +9,26 @@ import { Container, Typography, Divider } from "@material-ui/core";
 import { useAuth } from "@/lib/auth";
 import FreeTimesCalendar from "@/components/FreeTimesCalendar";
 
+let freeTimes = [
+  {
+    day: "Понеділок",
+    id: 1,
+    list: [],
+  },
+  { day: "Вівторок", id: 2, list: [] },
+  { day: "Середа", id: 3, list: [] },
+  {
+    day: "Четвер",
+    id: 4,
+    list: [],
+  },
+  {
+    day: "П'ятниця",
+    id: 5,
+    list: [],
+  },
+];
+
 const Home: React.FC = () => {
   const router = useRouter();
   const { user } = useAuth();
@@ -22,25 +42,6 @@ const Home: React.FC = () => {
 
   const [groupName, setGroupName] = useState("");
 
-  let freeTimes = [
-    {
-      day: "Понеділок",
-      id: 1,
-      list: [],
-    },
-    { day: "Вівторок", id: 2, list: [] },
-    { day: "Середа", id: 3, list: [] },
-    {
-      day: "Четвер",
-      id: 4,
-      list: [],
-    },
-    {
-      day: "П'ятниця",
-      id: 5,
-      list: [],
-    },
-  ];
   function getFreeTimes(day: string, id: number) {
     groupShedule[day].map((item: boolean, index: number) => {
       if (item === false) {
@@ -79,7 +80,7 @@ const Home: React.FC = () => {
       <Typography variant="h5" align="center">
         Перегляд графіку та запис до лікаря
       </Typography>
-      <Divider light variant="middle" className="home__divider" />
+      <Divider light variant="middle" />
       <SearchForm setGroupName={setGroupName} />
       {groupShedule ? (
         <>

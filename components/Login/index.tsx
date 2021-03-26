@@ -2,6 +2,7 @@ import { useState } from "react";
 import LoginDoctor from "../LoginDoctor";
 import LoginStudent from "../LoginStudent";
 import { Dialog, DialogTitle, Typography } from "@material-ui/core";
+import useStyles from "./styles";
 
 type Props = {
   open: boolean;
@@ -9,11 +10,12 @@ type Props = {
 };
 
 const Login: React.FC<Props> = ({ open, handleClose }) => {
+  const classes = useStyles();
   const [loginStudent, setLoginStudent] = useState(true);
   const changeLogin = () => setLoginStudent(!loginStudent);
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth={true}>
-      <DialogTitle style={{ textAlign: "center" }}>Login</DialogTitle>
+      <DialogTitle className={classes.title}>Login</DialogTitle>
       {loginStudent ? (
         <LoginStudent handleClose={handleClose} />
       ) : (
@@ -24,7 +26,7 @@ const Login: React.FC<Props> = ({ open, handleClose }) => {
         align="right"
         variant="subtitle1"
         onClick={changeLogin}
-        style={{ marginRight: 20, marginBottom: 20, cursor: "pointer" }}
+        className={classes.link}
       >
         Війти як {loginStudent ? "лікар" : "студент"}
       </Typography>

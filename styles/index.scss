@@ -1,11 +1,11 @@
-// @base
-@import "./base/base.scss";
-
-// @utils
-@import "./utils/utils.scss";
-
-// @components
-@import "./components/Layout.scss";
-@import "./components/header.scss";
-@import './components/login.scss';
-@import './components/freeTimes.scss';
+html {
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}

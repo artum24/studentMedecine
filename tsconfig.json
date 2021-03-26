@@ -21,6 +21,6 @@
       "@/utils/*": ["utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/auth.tsx", "pages/api/records/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/auth.tsx", "pages/api/records/index.ts"],
   "exclude": ["node_modules"]
 }

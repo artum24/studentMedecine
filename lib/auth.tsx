@@ -33,14 +33,14 @@ function useProvideAuth() {
     }
   };
 
-  const signinWithGoogle = () => {
+  const signinWithGoogle = async () => {
     return firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
       .then((response) => handleUser(response.user));
   };
 
-  const signinDoctor = (email, password) => {
+  const signinDoctor = async (email: string, password: string) => {
     Router.push(`/doctor/${email}`);
     return firebase
       .auth()
@@ -48,7 +48,7 @@ function useProvideAuth() {
       .then((response) => handleUser(response.user));
   };
 
-  const signout = () => {
+  const signout = async () => {
     Router.push("/");
     return firebase
       .auth()

@@ -16,7 +16,7 @@ const LoginStudent: React.FC<Props> = ({ handleClose }) => {
   };
   return (
     <DialogActions className={classes.root}>
-      <div className="login__student">
+      <div className={classes.login}>
         <Button
           startIcon={<FcGoogle />}
           className={classes.button}
