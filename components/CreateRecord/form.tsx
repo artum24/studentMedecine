@@ -7,13 +7,14 @@ import { doctorOption } from "./doctorOption";
 
 type Props = {
   onSubmit: (data: SearchType) => void;
-  records: { records: RecordsType[] } | { records: [] };
+  // records: { records: RecordsType[] } | { records: [] };
+  records: any
 };
 
 const CreateRecordForm: React.FC<Props> = ({ onSubmit, records }) => {
   const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
-  const recordsId = records.records ? records.records.map((item:RecordsType) => item.doctorId) : [];
+  const recordsId = records.records ? records.records.map((item) => item.doctorId) : [];
   const checkOptions = doctorOption.filter(
     (item) => !recordsId.includes(item.value)
   );
