@@ -21,6 +21,13 @@
       "@/utils/*": ["utils/*"]
     }
   },
+  "typescript": {
+    // !! WARN !!
+    // Dangerously allow production builds to successfully complete even if
+    // your project has type errors.
+    // !! WARN !!
+    "ignoreBuildErrors": true,
+  },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "lib/auth.tsx", "pages/api/records/index.ts"],
   "exclude": ["node_modules"]
 }

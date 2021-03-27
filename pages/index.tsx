@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
-import Head from "next/head";
+import Head from "next/head.d";
 import { useRouter } from "next/router";
 import { GroupSheduleType } from "types/table";
 import SearchForm from "@/components/SearchForm";
-import { Container, Typography, Divider } from "@material-ui/core";
+import {
+  Container,
+  Typography,
+  Divider,
+  CircularProgress,
+} from "@material-ui/core";
 import { useAuth } from "@/lib/auth";
 import FreeTimesCalendar from "@/components/FreeTimesCalendar";
 import axios from "axios";
@@ -37,12 +42,16 @@ const Home: React.FC = () => {
   const [groupShedule, setGroupShedule] = useState<GroupSheduleType | null>(
     null
   );
+  const [status, setStatus] = useState("idle");
+
   const [groupName, setGroupName] = useState("");
   useEffect(() => {
     if (groupName !== "" && groupName.length >= 3) {
+      setStatus("loading");
       axios
         .get(`/api/student/${groupName.toUpperCase()}`)
-        .then((res) => setGroupShedule(res.data.group[0]));
+        .then((res) => setGroupShedule(res.data.group[0]))
+        .then(() => setStatus("idle"));
     }
   }, [groupName]);
 
@@ -87,7 +96,18 @@ const Home: React.FC = () => {
       </Typography>
       <Divider light variant="middle" />
       <SearchForm setGroupName={setGroupName} />
-      {groupShedule ? (
+      {status === "loading" ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            marginTop: 50,
+          }}
+        >
+          <CircularProgress />
+        </div>
+      ) : groupShedule ? (
         <>
           <Typography variant="h3" align="center">
             {groupShedule.group}
