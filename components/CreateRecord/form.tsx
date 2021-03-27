@@ -13,7 +13,7 @@ type Props = {
 const CreateRecordForm: React.FC<Props> = ({ onSubmit, records }) => {
   const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
-  const recordsId = records.records.map((item) => item.doctorId);
+  const recordsId = records.records ? records.records.map((item:RecordsType) => item.doctorId) : [];
   const checkOptions = doctorOption.filter(
     (item) => !recordsId.includes(item.value)
   );
