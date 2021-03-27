@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { FreeTimeType } from "../FreeTimesCalendar";
+import { SearchType } from "./types";
 
 type Props = {
   open: boolean;
@@ -16,8 +17,6 @@ type Props = {
   date: Date;
   day: FreeTimeType;
 };
-
-type SearchType = { description: string; doctor: string };
 
 function getTime(period: number) {
   switch (period) {
@@ -42,10 +41,10 @@ function formatDate(date: Date, time: string) {
 const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
   const classes = useStyles();
   const resultTime = day.list.map((item) => getTime(item));
-  const [trueTime, setTrueTime] = useState(null);
-  const [records, setRecords] = useState([]);
-  console.log(resultTime);
-  console.log(records);
+  const [trueTime, setTrueTime] = useState(
+    resultTime.length === 1 ? resultTime[0] : null
+  );
+  const [records, setRecords] = useState({ records: [] });
   useEffect(() => {
     if (trueTime) {
       const timeDate = trueTime.split("-");
@@ -69,7 +68,9 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
       <DialogContent>
         <Typography variant="subtitle1">{day.day}</Typography>
         {resultTime.length === 1 ? (
-          resultTime[0]
+          <Typography variant="subtitle1" className={`${classes.item}`}>
+            {resultTime[0]}
+          </Typography>
         ) : (
           <>
             <Typography variant="subtitle2">Оберіть час</Typography>
@@ -86,7 +87,7 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
             ))}
           </>
         )}
-        <CreateRecordForm onSubmit={onSubmit} />
+        <CreateRecordForm onSubmit={onSubmit} records={records} />
       </DialogContent>
     </Dialog>
   );

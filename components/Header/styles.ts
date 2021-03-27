@@ -9,14 +9,6 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
       marginBottom: 50,
     },
-    null: {
-      [theme.breakpoints.down("md")]: {
-        display: "none",
-      },
-    },
-    logo: {
-      width: '100px',
-    },
     login: {
       display: "flex",
       alignItems: "center",

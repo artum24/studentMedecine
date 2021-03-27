@@ -42,7 +42,7 @@ export async function getAllDoctorRecords(startTime: number) {
       records.push({ ...doc.data() });
     });
     const newRecords = records.filter(
-      (item) => item.startDate["_seconds"] !== startTime
+      (item) => item.startDate["_seconds"] === startTime
     );
     return { records: newRecords };
   } catch (error) {

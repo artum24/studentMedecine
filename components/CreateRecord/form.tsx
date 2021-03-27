@@ -1,18 +1,22 @@
 import { useForm, Controller } from "react-hook-form";
 import Select from "react-select";
-
+import { SearchType,RecordsType } from "./types";
 import useStyles from "./styles";
 import { Button, TextField, Typography } from "@material-ui/core";
 import { doctorOption } from "./doctorOption";
 
 type Props = {
-  onSubmit: (data) => void;
+  onSubmit: (data: SearchType) => void;
+  records: { records: RecordsType[] } | { records: [] };
 };
 
-const CreateRecordForm: React.FC<Props> = ({ onSubmit }) => {
+const CreateRecordForm: React.FC<Props> = ({ onSubmit, records }) => {
   const classes = useStyles();
   const { handleSubmit, control, errors } = useForm();
-
+  const recordsId = records.records.map((item) => item.doctorId);
+  const checkOptions = doctorOption.filter(
+    (item) => !recordsId.includes(item.value)
+  );
   return (
     <form className={classes.root} onSubmit={handleSubmit(onSubmit)}>
       <Controller
@@ -20,7 +24,7 @@ const CreateRecordForm: React.FC<Props> = ({ onSubmit }) => {
         name="doctor"
         rules={{ required: true }}
         control={control}
-        options={doctorOption}
+        options={checkOptions}
         as={Select}
       />
       {errors.doctor && (

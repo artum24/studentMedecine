@@ -32,6 +32,7 @@ const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
   const allDays = [0, 1, 2, 3, 4, 5, 6];
   freeTimes.map((item) => item.list.length > 0 && freeTimesArr.push(item.id));
   const result = allDays.filter((item) => !freeTimesArr.includes(item));
+
   const disableData = (date: Date) => {
     let res;
     for (let i = 0; i < result.length; i++) {
@@ -41,12 +42,14 @@ const FreeTimesCalendar: React.FC<Props> = ({ freeTimes }) => {
   };
   return (
     <div className={classes.freeTimes}>
-      <CreateRecord
-        date={date}
-        day={freeTimes.filter((item) => item.id === date.getDay())[0]}
-        open={open}
-        handleClose={handleClose}
-      />
+      {date && freeTimes.filter((item) => item.id === date.getDay())[0] && (
+        <CreateRecord
+          date={date}
+          day={freeTimes.filter((item) => item.id === date.getDay())[0]}
+          open={open}
+          handleClose={handleClose}
+        />
+      )}
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <div className={classes.date}>
           <DatePicker

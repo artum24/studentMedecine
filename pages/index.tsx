@@ -1,13 +1,12 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
-import useSWR from "swr";
 import { GroupSheduleType } from "types/table";
-import fetcher from "@/utils/fetcher";
 import SearchForm from "@/components/SearchForm";
 import { Container, Typography, Divider } from "@material-ui/core";
 import { useAuth } from "@/lib/auth";
 import FreeTimesCalendar from "@/components/FreeTimesCalendar";
+import axios from "axios";
 
 let freeTimes = [
   {
@@ -35,12 +34,17 @@ const Home: React.FC = () => {
   if (user && user.status === "doctor") {
     router.push(`/doctor/${user.email}`);
   }
-
   const [groupShedule, setGroupShedule] = useState<GroupSheduleType | null>(
     null
   );
-
   const [groupName, setGroupName] = useState("");
+  useEffect(() => {
+    if (groupName !== "" && groupName.length >= 3) {
+      axios
+        .get(`/api/student/${groupName.toUpperCase()}`)
+        .then((res) => setGroupShedule(res.data.group[0]));
+    }
+  }, [groupName]);
 
   function getFreeTimes(day: string, id: number) {
     groupShedule[day].map((item: boolean, index: number) => {
@@ -66,11 +70,12 @@ const Home: React.FC = () => {
     getFreeTimes("П'ятниця", 5);
   }
 
-  const result = useSWR([`/api/student/${groupName.toUpperCase()}`], fetcher);
-  result.data &&
-    result.data.group[0] !== groupShedule &&
-    setGroupShedule(result.data.group[0]);
-
+  const updateFreeTimes = freeTimes.map((item) => {
+    return {
+      ...item,
+      list: item.list.filter((i, index) => item.list.indexOf(i) === index),
+    };
+  });
   return (
     <Container className="home">
       <Head>
@@ -87,7 +92,7 @@ const Home: React.FC = () => {
           <Typography variant="h3" align="center">
             {groupShedule.group}
           </Typography>
-          <FreeTimesCalendar freeTimes={freeTimes} />
+          <FreeTimesCalendar freeTimes={updateFreeTimes} />
         </>
       ) : (
         groupShedule !== null && <h1>Група не знайдена</h1>
