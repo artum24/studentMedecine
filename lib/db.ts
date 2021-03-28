@@ -13,5 +13,5 @@ export function createRecord(uid, data) {
   return firestore
     .collection("records")
     .doc(uid)
-    .set({ uid, ...data }, { merge: true });
+    .set({ ...data }, { merge: true });
 }

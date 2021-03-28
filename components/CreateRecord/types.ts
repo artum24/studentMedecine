@@ -5,4 +5,7 @@ export type RecordsType = {
   doctorId: string;
 };
 
-export type SearchType = { description: string; doctor: string };
+export type SearchType = {
+  description: string;
+  doctor: { value: string; label: string };
+};

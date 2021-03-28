@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import { FreeTimeType } from "../FreeTimesCalendar";
 import { SearchType } from "./types";
+import { useAuth } from "@/lib/auth";
+import { createRecord } from "@/lib/db";
 
 type Props = {
   open: boolean;
@@ -27,7 +29,7 @@ function getTime(period: number) {
     case 3:
       return "12:20 - 13:55";
     case 4:
-      return "14:15 - 16:50";
+      return "14:15 - 15:50";
   }
 }
 
@@ -39,11 +41,13 @@ function formatDate(date: Date, time: string) {
 }
 
 const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
+  const { user } = useAuth();
   const classes = useStyles();
   const resultTime = day.list.map((item) => getTime(item));
   const [trueTime, setTrueTime] = useState(
     resultTime.length === 1 ? resultTime[0] : null
   );
+
   const [records, setRecords] = useState({ records: [] });
   useEffect(() => {
     if (trueTime) {
@@ -55,7 +59,22 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
     }
   }, [trueTime, day, date]);
 
-  const onSubmit = (data: SearchType) => console.log(data);
+  const onSubmit = (data: SearchType) => {
+    const timeDate = trueTime.split("-");
+    const startDate = formatDate(date, timeDate[0]);
+    const endDate = formatDate(date, timeDate[1]);
+    const record = {
+      name: user.name,
+      email: user.email,
+      startDate,
+      endDate,
+      doctorId: data.doctor.value,
+      title: data.description,
+    };
+    let uniq = "id" + new Date().getTime();
+    createRecord(uniq, record);
+    handleClose();
+  };
 
   return (
     <Dialog
