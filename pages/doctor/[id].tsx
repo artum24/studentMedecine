@@ -42,7 +42,7 @@ const Doctor = () => {
         <link rel="icon" href="https://image.freepik.com/free-vector/doctor-icon-or-avatar-on-white_136162-58.jpg" />
       </Head>
       <div style={{minWidth: '1200px'}}>
-      <Scheduler data={dataa} height={660}>
+      <Scheduler firstDayOfWeek={1} data={dataa} height={660}>
         <ViewState defaultCurrentDate={new Date()} />
         <WeekView
           startDayHour={9}
