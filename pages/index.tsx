@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head.d";
 import { useRouter } from "next/router";
+import axios from "axios";
 import { GroupSheduleType } from "types/table";
 import SearchForm from "@/components/SearchForm";
 import {
@@ -11,7 +12,6 @@ import {
 } from "@material-ui/core";
 import { useAuth } from "@/lib/auth";
 import FreeTimesCalendar from "@/components/FreeTimesCalendar";
-import axios from "axios";
 
 let freeTimes = [
   {
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
     <Container className="home">
       <Head>
         <title>Головна сторінка</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="https://www.mcicon.com/wp-content/uploads/2020/12/Education_Student_1-copy.jpg" />
       </Head>
       <Typography variant="h5" align="center">
         Перегляд графіку та запис до лікаря

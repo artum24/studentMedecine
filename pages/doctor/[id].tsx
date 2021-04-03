@@ -13,6 +13,7 @@ import {
   Appointments,
 } from "@devexpress/dx-react-scheduler-material-ui";
 import Paper from "@material-ui/core/Paper";
+import Head from "next/head";
 
 const Doctor = () => {
   const router = useRouter();
@@ -36,6 +37,10 @@ const Doctor = () => {
   }
   return (
     <Paper>
+      <Head>
+        <title>Сторінка лікаря</title>
+        <link rel="icon" href="https://image.freepik.com/free-vector/doctor-icon-or-avatar-on-white_136162-58.jpg" />
+      </Head>
       <Scheduler data={dataa} height={660}>
         <ViewState defaultCurrentDate={new Date()} />
         <WeekView
