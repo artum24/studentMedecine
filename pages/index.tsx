@@ -89,7 +89,10 @@ const Home: React.FC = () => {
     <Container className="home">
       <Head>
         <title>Головна сторінка</title>
-        <link rel="icon" href="https://www.mcicon.com/wp-content/uploads/2020/12/Education_Student_1-copy.jpg" />
+        <link
+          rel="icon"
+          href="https://www.mcicon.com/wp-content/uploads/2020/12/Education_Student_1-copy.jpg"
+        />
       </Head>
       <Typography variant="h5" align="center">
         Перегляд графіку та запис до лікаря

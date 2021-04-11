@@ -7,6 +7,10 @@ const useStyles = makeStyles((theme: Theme) =>
       gridTemplateRows: "auto 1fr auto",
       minHeight: "100vh",
     },
+    alert: {
+      position: 'fixed',
+      width: '100%',
+    },
   })
 );
 

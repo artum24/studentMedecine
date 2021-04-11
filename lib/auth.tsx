@@ -17,6 +17,11 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+  const [userError, setUserError] = useState(null);
+  const [showAlert, setShowAlert] = useState(null);
+  const handleShowAlert = () => setShowAlert(true);
+  const closeAlert = () => setShowAlert(false);
+
   const handleUser = (rawUser) => {
     if (rawUser) {
       const user = formatUser(rawUser);
@@ -37,7 +42,9 @@ function useProvideAuth() {
     return firebase
       .auth()
       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then((response) => handleUser(response.user));
+      .then((response) => handleUser(response.user))
+      .then(() => setUserError(false))
+      .catch(() => setUserError(true));
   };
 
   const signinDoctor = async (email: string, password: string) => {
@@ -45,7 +52,9 @@ function useProvideAuth() {
     return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((response) => handleUser(response.user));
+      .then((response) => handleUser(response.user))
+      .then(() => setUserError(false))
+      .catch(() => setUserError(true));
   };
 
   const signout = async () => {
@@ -64,6 +73,10 @@ function useProvideAuth() {
     signinWithGoogle,
     signinDoctor,
     signout,
+    userError,
+    showAlert,
+    handleShowAlert,
+    closeAlert,
   };
 }
 

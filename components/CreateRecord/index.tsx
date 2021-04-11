@@ -41,7 +41,7 @@ function formatDate(date: Date, time: string) {
 }
 
 const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
-  const { user } = useAuth();
+  const { user, handleShowAlert } = useAuth();
   const classes = useStyles();
   const resultTime = day.list.map((item) => getTime(item));
   const [trueTime, setTrueTime] = useState(
@@ -73,6 +73,7 @@ const CreateRecord: React.FC<Props> = ({ open, day, handleClose, date }) => {
     };
     let uniq = "id" + new Date().getTime();
     createRecord(uniq, record);
+    handleShowAlert();
     handleClose();
   };
 

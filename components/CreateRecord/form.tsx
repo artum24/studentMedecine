@@ -7,7 +7,6 @@ import { doctorOption } from "./doctorOption";
 
 type Props = {
   onSubmit: (data: SearchType) => void;
-  // records: { records: RecordsType[] } | { records: [] };
   records: any;
 };
 

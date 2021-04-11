@@ -34,9 +34,7 @@ export async function getDoctorRecords(doctor: string) {
 
 export async function getAllDoctorRecords(startTime: number) {
   try {
-    const snapshot = await db
-      .collection("records")
-      .get();
+    const snapshot = await db.collection("records").get();
     const records = [];
     snapshot.forEach((doc) => {
       records.push({ ...doc.data() });

@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { useAuth } from "@/lib/auth";
 import useStyles from "./styles";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 
 type Props = {
   handleClose: () => void;
@@ -12,9 +12,10 @@ const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
   const { handleSubmit, control, errors } = useForm();
   const onSubmit = (data: { email: string; password: string }) => {
     auth.signinDoctor(data.email, data.password);
-    handleClose();
+    if (!auth.userError && auth.userError !== null) {
+      handleClose();
+    }
   };
-
   const classes = useStyles();
 
   return (
@@ -26,13 +27,13 @@ const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
         rules={{ required: true }}
         render={({ onChange, value }) => (
           <TextField
-            error={errors.login}
+            error={errors.email}
             onChange={onChange}
             value={value}
             type="email"
             placeholder="Email"
             className={classes.textField}
-            helperText={errors.login ? "Введіть логін" : null}
+            helperText={errors.email && "Введіть email"}
           />
         )}
       />
@@ -40,7 +41,7 @@ const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
         name="password"
         control={control}
         defaultValue=""
-        rules={{ required: true }}
+        rules={{ required: true, minLength: 5 }}
         render={({ onChange, value }) => (
           <TextField
             error={errors.password}
@@ -49,12 +50,24 @@ const LoginDoctor: React.FC<Props> = ({ handleClose }) => {
             type="password"
             placeholder="Password"
             className={classes.textField}
-            helperText={errors.password ? "Введіть пароль" : null}
+            helperText={
+              errors.password?.type === "required"
+                ? "Поле пусте"
+                : errors.password?.type === "minLength"
+                ? "Мінімальна довжина 6 символів"
+                : null
+            }
           />
         )}
       />
+      {auth.userError && (
+        <Typography variant="subtitle1" color="secondary">
+          Не вірний пароль або email
+        </Typography>
+      )}
       <Button
         className={classes.button}
+        disabled={Object.keys(errors).length !== 0}
         type="submit"
         color="primary"
         variant="contained"
