@@ -9,7 +9,6 @@ import {
     Typography,
     Divider,
     CircularProgress,
-    Select,
 } from "@material-ui/core";
 import {useAuth} from "@/lib/auth";
 import FreeTimesCalendar from "@/components/FreeTimesCalendar";
@@ -100,20 +99,6 @@ const Home: React.FC = () => {
             <Typography variant="h5" align="center">
                 Перегляд графіку та запис до лікаря
             </Typography>
-            <Select
-                native
-                // value={state.age}
-                // onChange={handleChange}
-                inputProps={{
-                    name: "age",
-                    id: "age-native-simple",
-                }}
-            >
-                <option aria-label="None" value="" />
-                <option value={10}>Ten</option>
-                <option value={20}>Twenty</option>
-                <option value={30}>Thirty</option>
-            </Select>
             <Divider light variant="middle" />
             <SearchForm setGroupName={setGroupName} />
             {status === "loading" ? (
