@@ -97,13 +97,6 @@ const Home: React.FC = () => {
       <Typography variant="h5" align="center">
         Перегляд графіку та запис до лікаря
       </Typography>
-      <select>
-        <option value="asas">asaas</option>
-        <option value="asas">asaas</option>
-        <option value="asas">asaas</option>
-        <option value="asas">asaas</option>
-        <option value="asas">asaas</option>
-      </select>
       <Divider light variant="middle" />
       <SearchForm setGroupName={setGroupName} />
       {status === "loading" ? (
